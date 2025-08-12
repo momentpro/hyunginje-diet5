@@ -837,39 +837,39 @@
                         <div class="form-group">
                             <div class="options-group">
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '소화력이 좋은 편')">
-                                    <input type="radio" name="digestion" value="소화력이 좋은 편" required>
+                                    <input type="checkbox" name="digestion" value="소화력이 좋은 편">
                                     <label>소화력이 좋은 편</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '과식할 때 더부룩함')">
-                                    <input type="radio" name="digestion" value="과식할 때 더부룩함" required>
+                                    <input type="checkbox" name="digestion" value="과식할 때 더부룩함">
                                     <label>과식할 때 더부룩함</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '과식하지 않아도 더부룩함')">
-                                    <input type="radio" name="digestion" value="과식하지 않아도 더부룩함" required>
+                                    <input type="checkbox" name="digestion" value="과식하지 않아도 더부룩함">
                                     <label>과식하지 않아도 더부룩함</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '식전에 속이 쓰림')">
-                                    <input type="radio" name="digestion" value="식전에 속이 쓰림" required>
+                                    <input type="checkbox" name="digestion" value="식전에 속이 쓰림">
                                     <label>식전에 속이 쓰림</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '식후에 속이 쓰림')">
-                                    <input type="radio" name="digestion" value="식후에 속이 쓰림" required>
+                                    <input type="checkbox" name="digestion" value="식후에 속이 쓰림">
                                     <label>식후에 속이 쓰림</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '간혹 식체를 함')">
-                                    <input type="radio" name="digestion" value="간혹 식체를 함" required>
+                                    <input type="checkbox" name="digestion" value="간혹 식체를 함">
                                     <label>간혹 식체를 함</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '자주 식체를 함')">
-                                    <input type="radio" name="digestion" value="자주 식체를 함" required>
+                                    <input type="checkbox" name="digestion" value="자주 식체를 함">
                                     <label>자주 식체를 함</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '신물이 올라옴')">
-                                    <input type="radio" name="digestion" value="신물이 올라옴" required>
+                                    <input type="checkbox" name="digestion" value="신물이 올라옴">
                                     <label>신물이 올라옴</label>
                                 </div>
                                 <div class="option-item" onclick="selectOption(this, 'digestion', '기타')">
-                                    <input type="radio" name="digestion" value="기타" required>
+                                    <input type="checkbox" name="digestion" value="기타">
                                     <label>기타:</label>
                                     <input type="text" class="other-input" name="digestion_other" placeholder="직접입력">
                                 </div>
@@ -888,7 +888,61 @@
                     </div>
                 </div>
                 
-                <!-- 계속해서 모든 질문들을 구현... -->
+                <!-- 5단계: 배변/배뇨 상태 -->
+                <div class="step" data-step="5">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">2. 평소 배변/배뇨 상태를 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'bowel_movement', '쾌변')">
+                                    <input type="radio" name="bowel_movement" value="쾌변" required>
+                                    <label>쾌변</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'bowel_movement', '변비 경향')">
+                                    <input type="radio" name="bowel_movement" value="변비 경향" required>
+                                    <label>변비 경향</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'bowel_movement', '설사 경향')">
+                                    <input type="radio" name="bowel_movement" value="설사 경향" required>
+                                    <label>설사 경향</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'bowel_movement', '음식에 따라 다름')">
+                                    <input type="radio" name="bowel_movement" value="음식에 따라 다름" required>
+                                    <label>음식에 따라 다름</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'bowel_movement', '기타')">
+                                    <input type="radio" name="bowel_movement" value="기타" required>
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="bowel_movement_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">2-1. 대변을 며칠마다 몇 번씩 보시나요? (예: 2일에 1번)</label>
+                            <input type="text" class="form-control" name="bowel_frequency" placeholder="예: 2일에 1번">
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">2-2. 소변을 하루에 몇 번 보시나요?</label>
+                            <input type="text" class="form-control" name="urine_frequency" placeholder="예: 하루 5-6번">
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">2-3. 소변 시 불편한 증상이 있다면 말씀해주세요. (없을 경우 '없음' 작성)</label>
+                            <textarea class="form-control" name="urine_symptoms" placeholder="소변 시 불편한 증상이 있으면 적어주세요. 없으면 '없음'이라고 작성해주세요."></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- 로딩 화면 -->
                 <div class="step" data-step="loading">
                     <div class="question-card">
@@ -922,7 +976,7 @@
     
     <script>
         let currentStep = 1;
-        const totalSteps = 20; // 실제 질문 수에 따라 조정
+        const totalSteps = 5; // 현재 구현된 단계 수
         
         // 초기화
         document.addEventListener('DOMContentLoaded', function() {
@@ -1063,6 +1117,26 @@
                 if (otherInput && value === '기타') {
                     otherInput.classList.add('show');
                     otherInput.focus();
+                }
+            } else if (input.type === 'checkbox') {
+                // 체크박스 토글
+                input.checked = !input.checked;
+                
+                if (input.checked) {
+                    element.classList.add('selected');
+                } else {
+                    element.classList.remove('selected');
+                }
+                
+                // 기타 선택시 입력 필드 표시
+                const otherInput = element.querySelector('.other-input');
+                if (otherInput && value === '기타') {
+                    if (input.checked) {
+                        otherInput.classList.add('show');
+                        otherInput.focus();
+                    } else {
+                        otherInput.classList.remove('show');
+                    }
                 }
             }
         }
