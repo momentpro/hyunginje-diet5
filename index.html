@@ -1845,15 +1845,15 @@
                         </div>
                         
                         <div class="privacy-consent">
-                            <div class="option-item" onclick="selectOption(this, 'privacy_agree', 'agree')">
-                                <input type="checkbox" name="privacy_agree" value="agree" required>
-                                <label><strong>개인정보 수집 및 이용에 동의합니다. <span class="required">*</span></strong></label>
+                            <div class="option-item" onclick="togglePrivacyAgree(this)">
+                                <input type="checkbox" name="privacy_agree" value="agree" id="privacyAgree">
+                                <label for="privacyAgree"><strong>개인정보 수집 및 이용에 동의합니다. <span class="required">*</span></strong></label>
                             </div>
                         </div>
                         
                         <div class="button-group">
                             <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
-                            <button type="submit" class="btn btn-primary">설문지 제출</button>
+                            <button type="submit" class="btn btn-primary" onclick="submitSurvey()">설문지 제출</button>
                         </div>
                     </div>
                 </div>
@@ -2009,22 +2009,57 @@
         // 현재 단계 유효성 검사
         function validateCurrentStep() {
             const currentStepElement = document.querySelector(`.step[data-step="${currentStep}"]`);
-            const requiredFields = currentStepElement.querySelectorAll('[required]');
             
-            for (let field of requiredFields) {
-                if (field.type === 'radio') {
-                    const radioGroup = currentStepElement.querySelectorAll(`[name="${field.name}"]`);
-                    const isChecked = Array.from(radioGroup).some(radio => radio.checked);
-                    if (!isChecked) {
-                        alert('필수 항목을 선택해주세요.');
+            // 기본 정보 단계 (1-3단계)에서만 필수 체크
+            if (currentStep <= 3) {
+                const nameField = currentStepElement.querySelector('input[name="name"]');
+                const phoneField = currentStepElement.querySelector('input[name="phone"]');
+                const emailField = currentStepElement.querySelector('input[name="email"]');
+                const genderFields = currentStepElement.querySelectorAll('input[name="gender"]');
+                const ageField = currentStepElement.querySelector('input[name="age"]');
+                const bodyInfoField = currentStepElement.querySelector('textarea[name="body_info"]');
+                
+                if (currentStep === 1) {
+                    if (nameField && !nameField.value.trim()) {
+                        nameField.focus();
+                        alert('이름을 입력해주세요.');
                         return false;
                     }
-                } else if (!field.value.trim()) {
-                    field.focus();
-                    alert('필수 항목을 입력해주세요.');
-                    return false;
+                    if (phoneField && !phoneField.value.trim()) {
+                        phoneField.focus();
+                        alert('휴대폰 번호를 입력해주세요.');
+                        return false;
+                    }
+                    if (emailField && !emailField.value.trim()) {
+                        emailField.focus();
+                        alert('이메일을 입력해주세요.');
+                        return false;
+                    }
+                }
+                
+                if (currentStep === 2) {
+                    const isGenderChecked = Array.from(genderFields || []).some(radio => radio.checked);
+                    if (!isGenderChecked) {
+                        alert('성별을 선택해주세요.');
+                        return false;
+                    }
+                    if (ageField && !ageField.value.trim()) {
+                        ageField.focus();
+                        alert('나이를 입력해주세요.');
+                        return false;
+                    }
+                }
+                
+                if (currentStep === 3) {
+                    if (bodyInfoField && !bodyInfoField.value.trim()) {
+                        bodyInfoField.focus();
+                        alert('신체 정보를 입력해주세요.');
+                        return false;
+                    }
                 }
             }
+            
+            // 나머지 단계는 선택사항으로 처리 (유효성 검사 통과)
             return true;
         }
         
@@ -2074,12 +2109,55 @@
             }
         }
         
-        // 폼 제출 처리
-        document.getElementById('surveyForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // 개인정보 동의 체크박스 토글
+        function togglePrivacyAgree(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                element.classList.add('selected');
+            } else {
+                element.classList.remove('selected');
+            }
+            
+            console.log('개인정보 동의 상태:', checkbox.checked);
+        }
+        
+        // 설문지 제출 함수 (버튼 클릭용)
+        function submitSurvey() {
+            console.log('제출 버튼 클릭됨!');
             
             // 개인정보 동의 확인
             const privacyAgree = document.querySelector('input[name="privacy_agree"]:checked');
+            console.log('개인정보 동의 체크:', privacyAgree);
+            
+            if (!privacyAgree) {
+                alert('개인정보 수집 및 이용에 동의해주세요.');
+                return false;
+            }
+            
+            // 로딩 상태 표시
+            showLoading();
+            
+            // 폼 데이터 수집
+            const formData = collectFormData();
+            console.log('수집된 폼 데이터:', formData);
+            
+            // 구글 시트에 데이터 전송
+            submitToGoogleSheet(formData);
+            
+            return false; // 폼 기본 제출 방지
+        }
+        
+        // 폼 제출 처리
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('폼 제출 이벤트 발생!');
+            
+            // 개인정보 동의 확인
+            const privacyAgree = document.querySelector('input[name="privacy_agree"]:checked');
+            console.log('개인정보 동의 체크:', privacyAgree);
+            
             if (!privacyAgree) {
                 alert('개인정보 수집 및 이용에 동의해주세요.');
                 return;
@@ -2090,6 +2168,7 @@
             
             // 폼 데이터 수집
             const formData = collectFormData();
+            console.log('수집된 폼 데이터:', formData);
             
             // 구글 시트에 데이터 전송
             submitToGoogleSheet(formData);
