@@ -6,8 +6,8 @@ function doPost(e) {
     // 시트 ID (새 Google Workspace 계정의 구글 시트)
     const SHEET_ID = '1Cz6LhDOLq412AmCzSHxcfGJinKTCqgRGVfLEyLp8re8';
     
-    // Google Chat Webhook URL
-    const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQATL-bikA/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=c7M2D8YU_u_zdIL4zXttatWqpIHqRmgTquPtQwVZDIk';
+    // Google Chat Webhook URL (새로 업데이트)
+    const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQA54l4mJw/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=yx9l89LGSXgZQnen1eZddb_WoKRvuim1bHUVbHyV15w';
     
     // JSON 데이터 파싱
     let data;
@@ -106,8 +106,8 @@ function doPost(e) {
 // Google Chat 알림 전송 함수
 function sendGoogleChatNotification(data, rowNumber) {
   try {
-    // Google Chat Webhook URL (이미 설정됨)
-    const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQATL-bikA/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=c7M2D8YU_u_zdIL4zXttatWqpIHqRmgTquPtQwVZDIk';
+    // Google Chat Webhook URL (새로 업데이트)
+    const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQA54l4mJw/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=yx9l89LGSXgZQnen1eZddb_WoKRvuim1bHUVbHyV15w';
     
     // 알림 메시지 생성
     const currentTime = new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
