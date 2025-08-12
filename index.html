@@ -2177,9 +2177,8 @@
             submissions.push(newSubmission);
             localStorage.setItem('surveySubmissions', JSON.stringify(submissions));
             
-            // Google Apps Script URL (실제 배포 후 URL로 교체 필요)
-            // 아래 URL은 예시입니다. 실제 배포된 Apps Script URL로 교체해야 합니다.
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxQYourDeploymentIdHere/exec';
+            // 실제 배포된 Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwe7M_vyUyyFMokI5YXp_4liEnbxtyRVKUu6nIdHKWQRzGQSmEiGugpPgyEMtm4krmDSQ/exec';
             
             // 구글 시트에 데이터 전송
             fetch(scriptURL, {

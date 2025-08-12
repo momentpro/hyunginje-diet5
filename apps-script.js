@@ -1,10 +1,13 @@
-// Google Apps Script 코드 - 구글 시트 자동 저장
+// Google Apps Script 코드 - 구글 시트 자동 저장 + Google Chat 알림
 // 이 코드를 https://script.google.com 에서 새 프로젝트를 만들어 붙여넣고 배포하세요.
 
 function doPost(e) {
   try {
     // 시트 ID (실제 구글 시트 ID)
     const SHEET_ID = '1HHpMjj3I_7eCm8Ce3tVjj-68JwUUfcO7X5hed5dsXLA';
+    
+    // Google Chat Webhook URL (실제 webhook URL로 교체 필요)
+    const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/YOUR_SPACE_ID/messages?key=YOUR_KEY&token=YOUR_TOKEN';
     
     // JSON 데이터 파싱
     let data;
@@ -67,16 +70,20 @@ function doPost(e) {
     
     // 새 행 추가
     sheet.appendRow(newRow);
+    const rowNumber = sheet.getLastRow();
     
     // 자동 크기 조정
     sheet.autoResizeColumns(1, headers.length);
+    
+    // Google Chat 알림 전송
+    sendGoogleChatNotification(data, rowNumber);
     
     return ContentService
       .createTextOutput(JSON.stringify({
         success: true,
         message: '데이터가 성공적으로 저장되었습니다.',
         timestamp: new Date().toISOString(),
-        rowNumber: sheet.getLastRow()
+        rowNumber: rowNumber
       }))
       .setMimeType(ContentService.MimeType.JSON);
       
@@ -90,6 +97,98 @@ function doPost(e) {
         timestamp: new Date().toISOString()
       }))
       .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// Google Chat 알림 전송 함수
+function sendGoogleChatNotification(data, rowNumber) {
+  try {
+    // Google Chat Webhook URL을 설정하세요
+    const GOOGLE_CHAT_WEBHOOK = 'YOUR_GOOGLE_CHAT_WEBHOOK_URL';
+    
+    // 만약 webhook URL이 설정되지 않았으면 알림을 보내지 않음
+    if (GOOGLE_CHAT_WEBHOOK === 'YOUR_GOOGLE_CHAT_WEBHOOK_URL') {
+      console.log('Google Chat Webhook URL이 설정되지 않았습니다.');
+      return;
+    }
+    
+    // 알림 메시지 생성
+    const currentTime = new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
+    const customerName = data['이름'] || '이름 없음';
+    const customerGender = data['성별'] || '미입력';
+    const customerAge = data['나이'] || '미입력';
+    const customerPhone = data['휴대폰 번호'] || '미입력';
+    const customerEmail = data['이메일'] || '미입력';
+    
+    const message = {
+      text: `🏥 *형인재 감량비책 새로운 설문 응답*\n\n` +
+            `📅 *제출시간:* ${currentTime}\n` +
+            `👤 *이름:* ${customerName}\n` +
+            `⚧️ *성별:* ${customerGender}\n` +
+            `🎂 *나이:* ${customerAge}세\n` +
+            `📞 *전화번호:* ${customerPhone}\n` +
+            `📧 *이메일:* ${customerEmail}\n\n` +
+            `📊 구글 시트 ${rowNumber}번째 행에 저장되었습니다.\n\n` +
+            `🔗 *구글 시트 보기:* https://docs.google.com/spreadsheets/d/1HHpMjj3I_7eCm8Ce3tVjj-68JwUUfcO7X5hed5dsXLA/edit`
+    };
+    
+    // Google Chat으로 메시지 전송
+    const response = UrlFetchApp.fetch(GOOGLE_CHAT_WEBHOOK, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      payload: JSON.stringify(message)
+    });
+    
+    console.log('Google Chat 알림 전송 완료:', response.getContentText());
+    
+  } catch (error) {
+    console.error('Google Chat 알림 전송 실패:', error);
+  }
+}
+
+// Slack 알림 전송 함수 (추가 옵션)
+function sendSlackNotification(data, rowNumber) {
+  try {
+    // Slack Webhook URL을 설정하세요
+    const SLACK_WEBHOOK = 'YOUR_SLACK_WEBHOOK_URL';
+    
+    if (SLACK_WEBHOOK === 'YOUR_SLACK_WEBHOOK_URL') {
+      console.log('Slack Webhook URL이 설정되지 않았습니다.');
+      return;
+    }
+    
+    const currentTime = new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
+    const customerName = data['이름'] || '이름 없음';
+    const customerGender = data['성별'] || '미입력';
+    const customerAge = data['나이'] || '미입력';
+    const customerPhone = data['휴대폰 번호'] || '미입력';
+    
+    const message = {
+      text: `🏥 형인재 감량비책 새로운 설문 응답`,
+      attachments: [{
+        color: 'good',
+        fields: [
+          { title: '제출시간', value: currentTime, short: true },
+          { title: '이름', value: customerName, short: true },
+          { title: '성별', value: customerGender, short: true },
+          { title: '나이', value: `${customerAge}세`, short: true },
+          { title: '전화번호', value: customerPhone, short: false }
+        ]
+      }]
+    };
+    
+    const response = UrlFetchApp.fetch(SLACK_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      payload: JSON.stringify(message)
+    });
+    
+    console.log('Slack 알림 전송 완료:', response.getContentText());
+    
+  } catch (error) {
+    console.error('Slack 알림 전송 실패:', error);
   }
 }
 
