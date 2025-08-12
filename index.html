@@ -2174,12 +2174,12 @@
             submitToGoogleSheet(formData);
         });
         
-        // 간단한 폼 데이터 수집 함수 (필드명 그대로 전송)
+        // 폰 데이터 수집 함수 (영어 필드명 그대로 사용 - 안전함)
         function collectFormData() {
             const formData = {};
             
             // 현재 날짜/시간 추가
-            formData['제출일시'] = new Date().toLocaleString('ko-KR');
+            formData['timestamp'] = new Date().toLocaleString('ko-KR');
             
             // 모든 입력 필드를 name 속성 그대로 수집
             const inputs = document.querySelectorAll('input, textarea, select');
