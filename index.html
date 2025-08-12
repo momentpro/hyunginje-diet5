@@ -2174,28 +2174,71 @@
             submitToGoogleSheet(formData);
         });
         
-        // 폼 데이터 수집 함수
+        // 폼 데이터 수집 함수 (한글 필드명으로 직접 매핑)
         function collectFormData() {
             const formData = {};
             
             // 현재 날짜/시간 추가
             formData['제출일시'] = new Date().toLocaleString('ko-KR');
             
+            // 직접 한글 필드명으로 매핑
+            const fieldMapping = {
+                'name': '이름', 'phone': '휴대폰 번호', 'email': '이메일',
+                'gender': '성별', 'age': '나이', 'body_info': '신체 정보', 'pregnancy_plan': '임신 계획',
+                'digestion_state': '1. 소화 상태', 'bowel_movement': '2-1. 배변 상태',
+                'bowel_frequency': '2-2. 배변 횟수', 'bowel_consistency': '2-3. 대변 성상',
+                'urination': '2-4. 배뇨 상태', 'sleep_state': '3. 수면 상태',
+                'sleep_schedule': '3-1. 수면 시간대', 'sleep_time': '3-2. 취침/기상 시간',
+                'edema': '4. 부종 부위', 'edema_time': '4-1. 부종 시간대', 'edema_cause': '4-2. 부종 원인',
+                'menstrual_cycle': '5. 생리 주기', 'last_menstrual_date': '5-1. 마지막 생리일',
+                'menstrual_symptoms': '5-2. 생리 증상', 'pain': '6. 통증', 'fatigue': '7. 피로/무기력',
+                'medical_history': '8. 병력', 'surgery_history': '8-1. 수술 경험',
+                'medications': '9. 복용 약물/보조제', 'exercise_habit': '10. 운동 습관',
+                'exercise_pattern': '10-1. 운동 패턴', 'weight_10years': '11. 최근 10년 평균 체중',
+                'weight_1year': '11-1. 최근 1년 평균 체중', 'weight_changes': '11-2. 과거 체중 변화',
+                'recent_weight_changes': '11-3. 최근 체중 변화', 'diet_success': '12. 성공한 다이어트 경험',
+                'recent_diet': '12-1. 최근 다이어트 경험', 'diet_difficulties': '12-2. 다이어트 어려움/부작용',
+                'diet_goal': '13. 다이어트 목표', 'size_reduction': '13-1. 사이즈 감소 희망 부위',
+                'diet_purpose': '13-2. 다이어트 목적', 'eating_habits': '14. 식이습관',
+                'problem_eating': '14-1. 문제 식이 패턴', 'meal_info': '15. 평균 식사 정보',
+                'breakfast': '15-1. 아침식사', 'lunch': '15-2. 점심식사', 'dinner': '15-3. 저녁식사',
+                'snack_habit': '16. 간식 습관', 'snack_frequency': '16-1. 간식 섭취 횟수',
+                'snack_types': '16-2. 즐겨먹는 간식/야식', 'drinking_habit': '17. 음주 습관',
+                'drinking_frequency': '17-1. 음주 횟수', 'drinking_amount': '17-2. 음주량',
+                'water_intake': '18. 물 섭취량', 'coffee_intake': '19. 커피 섭취량',
+                'coffee_effects': '19-1. 커피 영향', 'privacy_agree': '개인정보 동의'
+            };
+            
             // 모든 입력 필드 수집
             const inputs = document.querySelectorAll('input, textarea, select');
             inputs.forEach(input => {
-                if (input.type === 'radio' || input.type === 'checkbox') {
-                    if (input.checked) {
-                        const fieldName = getFieldDisplayName(input.name);
-                        if (formData[fieldName]) {
-                            formData[fieldName] += ', ' + input.value;
+                if (input.name && fieldMapping[input.name]) {
+                    const koreanFieldName = fieldMapping[input.name];
+                    
+                    if (input.type === 'radio' || input.type === 'checkbox') {
+                        if (input.checked) {
+                            if (formData[koreanFieldName]) {
+                                formData[koreanFieldName] += ', ' + input.value;
+                            } else {
+                                formData[koreanFieldName] = input.value;
+                            }
+                        }
+                    } else if (input.value.trim() !== '') {
+                        formData[koreanFieldName] = input.value;
+                    }
+                }
+                
+                // 기타 입력 필드들도 처리
+                if (input.name && input.name.includes('_other') && input.value.trim() !== '') {
+                    const baseField = input.name.replace('_other', '');
+                    if (fieldMapping[baseField]) {
+                        const koreanFieldName = fieldMapping[baseField];
+                        if (formData[koreanFieldName]) {
+                            formData[koreanFieldName] += ' (' + input.value + ')';
                         } else {
-                            formData[fieldName] = input.value;
+                            formData[koreanFieldName] = input.value;
                         }
                     }
-                } else if (input.value.trim() !== '') {
-                    const fieldName = getFieldDisplayName(input.name);
-                    formData[fieldName] = input.value;
                 }
             });
             
