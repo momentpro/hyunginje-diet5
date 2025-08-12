@@ -3,31 +3,27 @@
 
 function doPost(e) {
   try {
-    // 시트 ID (새 Google Workspace 계정의 구글 시트)
-    const SHEET_ID = '1Cz6LhDOLq412AmCzSHxcfGJinKTCqgRGVfLEyLp8re8';
-    
-    // Google Chat Webhook URL (새로 업데이트)
-    const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQA54l4mJw/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=yx9l89LGSXgZQnen1eZddb_WoKRvuim1bHUVbHyV15w';
+    // 🔒 보안: 실제 배포 시 아래 값들을 입력하세요
+    const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE';
+    const GOOGLE_CHAT_WEBHOOK = 'YOUR_GOOGLE_CHAT_WEBHOOK_URL_HERE';
     
     // JSON 데이터 파싱
     let data;
     try {
       data = JSON.parse(e.postData.contents);
     } catch (parseError) {
-      // URL 인코딩된 데이터 처리
+      console.error('JSON 파싱 오류:', parseError);
       data = e.parameter;
     }
     
-    // 시트 열기
+    // 구글 시트에 데이터 저장
     const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
     let sheet = spreadsheet.getSheetByName('시트1');
-    
-    // 시트가 없으면 생성
     if (!sheet) {
       sheet = spreadsheet.insertSheet('시트1');
     }
     
-    // 헤더 행이 없으면 생성
+    // 헤더가 없으면 생성
     if (sheet.getLastRow() === 0) {
       const headers = [
         '제출일시', '이름', '휴대폰 번호', '이메일', '성별', '나이', '신체 정보', '임신 계획',
@@ -48,7 +44,6 @@ function doPost(e) {
       ];
       sheet.appendRow(headers);
       
-      // 헤더 스타일링
       const headerRange = sheet.getRange(1, 1, 1, headers.length);
       headerRange.setBackground('#d4af8c');
       headerRange.setFontColor('#ffffff');
@@ -56,58 +51,53 @@ function doPost(e) {
       headerRange.setWrap(true);
     }
     
-    // 헤더 행 가져오기
+    // 데이터 추가
     const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    
-    // 새 행 데이터 준비
     const newRow = [];
-    
-    // 각 헤더에 해당하는 데이터 찾기
     headers.forEach(header => {
       const value = data[header] || '';
       newRow.push(value);
     });
     
-    // 새 행 추가
     sheet.appendRow(newRow);
     const rowNumber = sheet.getLastRow();
     
-    // 자동 크기 조정
+    // 열 너비 자동 조정
     sheet.autoResizeColumns(1, headers.length);
     
     // Google Chat 알림 전송
     sendGoogleChatNotification(data, rowNumber);
     
-    // Gmail 알림도 함께 전송 (백업용)
+    // Gmail 알림 전송
     sendGmailNotification(data, rowNumber);
     
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        success: true,
-        message: '데이터가 성공적으로 저장되었습니다.',
-        timestamp: new Date().toISOString(),
-        rowNumber: rowNumber
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
-      
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      message: '데이터가 성공적으로 저장되었습니다.',
+      timestamp: new Date().toISOString(),
+      rowNumber: rowNumber
+    })).setMimeType(ContentService.MimeType.JSON);
+    
   } catch (error) {
     console.error('Error:', error);
-    
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        success: false,
-        message: '데이터 저장 중 오류가 발생했습니다: ' + error.toString(),
-        timestamp: new Date().toISOString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: '데이터 저장 중 오류가 발생했습니다: ' + error.toString(),
+      timestamp: new Date().toISOString()
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
 // Google Chat 알림 전송 함수
 function sendGoogleChatNotification(data, rowNumber) {
   try {
-    // Google Chat Webhook URL (새로 업데이트)
-    const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQA54l4mJw/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=yx9l89LGSXgZQnen1eZddb_WoKRvuim1bHUVbHyV15w';
+    // 🔒 보안: 실제 배포 시 여기에 웹훅 URL을 입력하세요
+    const GOOGLE_CHAT_WEBHOOK = 'YOUR_GOOGLE_CHAT_WEBHOOK_URL_HERE';
+    
+    if (GOOGLE_CHAT_WEBHOOK === 'YOUR_GOOGLE_CHAT_WEBHOOK_URL_HERE') {
+      console.log('Google Chat Webhook URL이 설정되지 않았습니다.');
+      return;
+    }
     
     // 알림 메시지 생성
     const currentTime = new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
@@ -126,10 +116,9 @@ function sendGoogleChatNotification(data, rowNumber) {
             `📞 *전화번호:* ${customerPhone}\n` +
             `📧 *이메일:* ${customerEmail}\n\n` +
             `📊 구글 시트 ${rowNumber}번째 행에 저장되었습니다.\n\n` +
-            `🔗 *구글 시트 보기:* https://docs.google.com/spreadsheets/d/1Cz6LhDOLq412AmCzSHxcfGJinKTCqgRGVfLEyLp8re8/edit`
+            `🔗 *구글 시트 보기:* https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit`
     };
     
-    // Google Chat으로 메시지 전송
     const response = UrlFetchApp.fetch(GOOGLE_CHAT_WEBHOOK, {
       method: 'POST',
       headers: {
@@ -139,57 +128,12 @@ function sendGoogleChatNotification(data, rowNumber) {
     });
     
     console.log('Google Chat 알림 전송 완료:', response.getContentText());
-    
   } catch (error) {
     console.error('Google Chat 알림 전송 실패:', error);
   }
 }
 
-// Slack 알림 전송 함수 (추가 옵션)
-function sendSlackNotification(data, rowNumber) {
-  try {
-    // Slack Webhook URL을 설정하세요
-    const SLACK_WEBHOOK = 'YOUR_SLACK_WEBHOOK_URL';
-    
-    if (SLACK_WEBHOOK === 'YOUR_SLACK_WEBHOOK_URL') {
-      console.log('Slack Webhook URL이 설정되지 않았습니다.');
-      return;
-    }
-    
-    const currentTime = new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
-    const customerName = data['이름'] || '이름 없음';
-    const customerGender = data['성별'] || '미입력';
-    const customerAge = data['나이'] || '미입력';
-    const customerPhone = data['휴대폰 번호'] || '미입력';
-    
-    const message = {
-      text: `🏥 형인재 감량비책 새로운 설문 응답`,
-      attachments: [{
-        color: 'good',
-        fields: [
-          { title: '제출시간', value: currentTime, short: true },
-          { title: '이름', value: customerName, short: true },
-          { title: '성별', value: customerGender, short: true },
-          { title: '나이', value: `${customerAge}세`, short: true },
-          { title: '전화번호', value: customerPhone, short: false }
-        ]
-      }]
-    };
-    
-    const response = UrlFetchApp.fetch(SLACK_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      payload: JSON.stringify(message)
-    });
-    
-    console.log('Slack 알림 전송 완료:', response.getContentText());
-    
-  } catch (error) {
-    console.error('Slack 알림 전송 실패:', error);
-  }
-}
-
-// Gmail 알림 전송 함수 (더 간단함)
+// Gmail 알림 전송 함수
 function sendGmailNotification(data, rowNumber) {
   try {
     const currentTime = new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
@@ -213,14 +157,14 @@ function sendGmailNotification(data, rowNumber) {
         <tr><td><b>📊 저장 위치</b></td><td>구글 시트 ${rowNumber}번째 행</td></tr>
       </table>
       <br>
-      <p><a href="https://docs.google.com/spreadsheets/d/1Cz6LhDOLq412AmCzSHxcfGJinKTCqgRGVfLEyLp8re8/edit" target="_blank">📊 구글 시트에서 전체 데이터 보기</a></p>
+      <p><a href="https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit" target="_blank">📊 구글 시트에서 전체 데이터 보기</a></p>
     `;
     
-    // 본인의 Gmail 주소로 알림 전송
+    // 🔒 보안: 실제 배포 시 이메일 주소를 변경하세요
     GmailApp.sendEmail(
-      'momentpro7@gmail.com', // 받을 이메일 주소 (실제 주소로 변경)
+      'YOUR_EMAIL@gmail.com', // 받을 이메일 주소
       subject,
-      '', // 텍스트 내용 (HTML 사용하므로 비워둠)
+      '',
       {
         htmlBody: htmlBody,
         name: '형인재 감량비책 알림 시스템'
@@ -228,38 +172,7 @@ function sendGmailNotification(data, rowNumber) {
     );
     
     console.log('Gmail 알림 전송 완료');
-    
   } catch (error) {
     console.error('Gmail 알림 전송 실패:', error);
   }
-}
-
-function doGet(e) {
-  return ContentService
-    .createTextOutput(JSON.stringify({
-      message: '형인재 감량비책 설문지 데이터 수집 API가 정상 작동 중입니다.',
-      timestamp: new Date().toISOString()
-    }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-// 테스트 함수
-function testFunction() {
-  const testData = {
-    '제출일시': new Date().toLocaleString('ko-KR'),
-    '이름': '테스트 사용자',
-    '휴대폰 번호': '010-1234-5678',
-    '이메일': 'test@example.com',
-    '성별': '여성',
-    '나이': '30'
-  };
-  
-  const mockEvent = {
-    postData: {
-      contents: JSON.stringify(testData)
-    }
-  };
-  
-  const result = doPost(mockEvent);
-  Logger.log(result.getContent());
 }
