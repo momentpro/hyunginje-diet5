@@ -3,8 +3,8 @@
 
 function doPost(e) {
   try {
-    // 시트 ID (실제 구글 시트 ID)
-    const SHEET_ID = '1HHpMjj3I_7eCm8Ce3tVjj-68JwUUfcO7X5hed5dsXLA';
+    // 시트 ID (새 Google Workspace 계정의 구글 시트 ID로 교체 필요)
+    const SHEET_ID = 'NEW_GOOGLE_WORKSPACE_SHEET_ID_HERE';
     
     // Google Chat Webhook URL (실제 webhook URL로 교체 필요)
     const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/YOUR_SPACE_ID/messages?key=YOUR_KEY&token=YOUR_TOKEN';
@@ -78,6 +78,9 @@ function doPost(e) {
     // Google Chat 알림 전송
     sendGoogleChatNotification(data, rowNumber);
     
+    // Gmail 알림도 함께 전송 (백업용)
+    sendGmailNotification(data, rowNumber);
+    
     return ContentService
       .createTextOutput(JSON.stringify({
         success: true,
@@ -129,7 +132,7 @@ function sendGoogleChatNotification(data, rowNumber) {
             `📞 *전화번호:* ${customerPhone}\n` +
             `📧 *이메일:* ${customerEmail}\n\n` +
             `📊 구글 시트 ${rowNumber}번째 행에 저장되었습니다.\n\n` +
-            `🔗 *구글 시트 보기:* https://docs.google.com/spreadsheets/d/1HHpMjj3I_7eCm8Ce3tVjj-68JwUUfcO7X5hed5dsXLA/edit`
+            `🔗 *구글 시트 보기:* https://docs.google.com/spreadsheets/d/NEW_GOOGLE_WORKSPACE_SHEET_ID_HERE/edit`
     };
     
     // Google Chat으로 메시지 전송
@@ -189,6 +192,51 @@ function sendSlackNotification(data, rowNumber) {
     
   } catch (error) {
     console.error('Slack 알림 전송 실패:', error);
+  }
+}
+
+// Gmail 알림 전송 함수 (더 간단함)
+function sendGmailNotification(data, rowNumber) {
+  try {
+    const currentTime = new Date().toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'});
+    const customerName = data['이름'] || '이름 없음';
+    const customerGender = data['성별'] || '미입력';
+    const customerAge = data['나이'] || '미입력';
+    const customerPhone = data['휴대폰 번호'] || '미입력';
+    const customerEmail = data['이메일'] || '미입력';
+    
+    const subject = `🏥 형인재 감량비책 새로운 설문 응답 - ${customerName}`;
+    
+    const htmlBody = `
+      <h2>🏥 형인재 감량비책 새로운 설문 응답</h2>
+      <table border="1" style="border-collapse: collapse; width: 100%; max-width: 500px;">
+        <tr><td><b>📅 제출시간</b></td><td>${currentTime}</td></tr>
+        <tr><td><b>👤 이름</b></td><td>${customerName}</td></tr>
+        <tr><td><b>⚧️ 성별</b></td><td>${customerGender}</td></tr>
+        <tr><td><b>🎂 나이</b></td><td>${customerAge}세</td></tr>
+        <tr><td><b>📞 전화번호</b></td><td>${customerPhone}</td></tr>
+        <tr><td><b>📧 이메일</b></td><td>${customerEmail}</td></tr>
+        <tr><td><b>📊 저장 위치</b></td><td>구글 시트 ${rowNumber}번째 행</td></tr>
+      </table>
+      <br>
+      <p><a href="https://docs.google.com/spreadsheets/d/NEW_GOOGLE_WORKSPACE_SHEET_ID_HERE/edit" target="_blank">📊 구글 시트에서 전체 데이터 보기</a></p>
+    `;
+    
+    // 본인의 Gmail 주소로 알림 전송
+    GmailApp.sendEmail(
+      'momentpro7@gmail.com', // 받을 이메일 주소 (실제 주소로 변경)
+      subject,
+      '', // 텍스트 내용 (HTML 사용하므로 비워둠)
+      {
+        htmlBody: htmlBody,
+        name: '형인재 감량비책 알림 시스템'
+      }
+    );
+    
+    console.log('Gmail 알림 전송 완료');
+    
+  } catch (error) {
+    console.error('Gmail 알림 전송 실패:', error);
   }
 }
 
