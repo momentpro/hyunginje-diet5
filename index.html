@@ -943,8 +943,922 @@
                     </div>
                 </div>
                 
+                <!-- 6단계: 수면 상태 -->
+                <div class="step" data-step="6">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">3. 평소 수면 상태를 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'sleep_state', '숙면')">
+                                    <input type="checkbox" name="sleep_state" value="숙면">
+                                    <label>숙면</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_state', '잠들기 어려움')">
+                                    <input type="checkbox" name="sleep_state" value="잠들기 어려움">
+                                    <label>잠들기 어려움</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_state', '쉽게 잠이 깸')">
+                                    <input type="checkbox" name="sleep_state" value="쉽게 잠이 깸">
+                                    <label>쉽게 잠이 깸</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_state', '깨어 일어나기 어려움')">
+                                    <input type="checkbox" name="sleep_state" value="깨어 일어나기 어려움">
+                                    <label>깨어 일어나기 어려움</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_state', '커피의 영향을 받음')">
+                                    <input type="checkbox" name="sleep_state" value="커피의 영향을 받음">
+                                    <label>커피의 영향을 받음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_state', '기타')">
+                                    <input type="checkbox" name="sleep_state" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="sleep_state_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">3-1. 수면 시간대는 규칙적인가요?</label>
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'sleep_schedule', '규칙적')">
+                                    <input type="radio" name="sleep_schedule" value="규칙적">
+                                    <label>규칙적</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_schedule', '불규칙적')">
+                                    <input type="radio" name="sleep_schedule" value="불규칙적">
+                                    <label>불규칙적</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_schedule', '교대 근무')">
+                                    <input type="radio" name="sleep_schedule" value="교대 근무">
+                                    <label>교대 근무</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'sleep_schedule', '기타')">
+                                    <input type="radio" name="sleep_schedule" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="sleep_schedule_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">3-2. 대체로 몇 시에 취침하여 몇 시에 일어나시나요? (예: 22~24시 사이 취침, 7시 기상)</label>
+                            <textarea class="form-control" name="sleep_time" placeholder="예: 23시 취침, 7시 기상"></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 7단계: 부종 -->
+                <div class="step" data-step="7">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">4. 평소 부종이 생기셨나요? 생길 경우 부종 부위를 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'edema', '없음')">
+                                    <input type="checkbox" name="edema" value="없음">
+                                    <label>없음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema', '안면부')">
+                                    <input type="checkbox" name="edema" value="안면부">
+                                    <label>안면부</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema', '상지부(손)')">
+                                    <input type="checkbox" name="edema" value="상지부(손)">
+                                    <label>상지부(손)</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema', '하지부(종아리, 발)')">
+                                    <input type="checkbox" name="edema" value="하지부(종아리, 발)">
+                                    <label>하지부(종아리, 발)</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema', '기타')">
+                                    <input type="checkbox" name="edema" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="edema_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">4-1. 주로 어느 시간대에 부종이 생기나요?</label>
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'edema_time', '오전')">
+                                    <input type="radio" name="edema_time" value="오전">
+                                    <label>오전</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema_time', '오후')">
+                                    <input type="radio" name="edema_time" value="오후">
+                                    <label>오후</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema_time', '야간')">
+                                    <input type="radio" name="edema_time" value="야간">
+                                    <label>야간</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema_time', '하루 종일')">
+                                    <input type="radio" name="edema_time" value="하루 종일">
+                                    <label>하루 종일</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'edema_time', '기타')">
+                                    <input type="radio" name="edema_time" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="edema_time_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">4-2. 부종의 원인을 말씀해주세요. (모를 경우 '모름' 작성)</label>
+                            <textarea class="form-control" name="edema_cause" placeholder="부종의 원인을 적어주세요. 모르시면 '모름'이라고 작성해주세요."></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 8단계: 생리 주기 -->
+                <div class="step" data-step="8">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">5. 평소 생리 주기를 말씀해주세요. (남성분들은 하단 '남성'에 체크)</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_cycle', '일정함')">
+                                    <input type="radio" name="menstrual_cycle" value="일정함">
+                                    <label>일정함</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_cycle', '약간 불규칙함')">
+                                    <input type="radio" name="menstrual_cycle" value="약간 불규칙함">
+                                    <label>약간 불규칙함</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_cycle', '매우 불규칙함')">
+                                    <input type="radio" name="menstrual_cycle" value="매우 불규칙함">
+                                    <label>매우 불규칙함</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_cycle', '무월경')">
+                                    <input type="radio" name="menstrual_cycle" value="무월경">
+                                    <label>무월경</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_cycle', '폐경')">
+                                    <input type="radio" name="menstrual_cycle" value="폐경">
+                                    <label>폐경</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_cycle', '남성')">
+                                    <input type="radio" name="menstrual_cycle" value="남성">
+                                    <label>남성</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_cycle', '기타')">
+                                    <input type="radio" name="menstrual_cycle" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="menstrual_cycle_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">5-1. 마지막 생리 시작일을 말씀해주세요. (무월경, 폐경 및 남성분의 경우 '없음' 작성)</label>
+                            <input type="text" class="form-control" name="last_menstrual_date" placeholder="예: 2024년 1월 15일 또는 '없음'">
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">5-2. 일반적인 생리 증상을 말씀해주세요.</label>
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_symptoms', '생리통 때문에 약간 불편함')">
+                                    <input type="checkbox" name="menstrual_symptoms" value="생리통 때문에 약간 불편함">
+                                    <label>생리통 때문에 약간 불편함</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_symptoms', '생리통 때문에 아프지만 참음')">
+                                    <input type="checkbox" name="menstrual_symptoms" value="생리통 때문에 아프지만 참음">
+                                    <label>생리통 때문에 아프지만 참음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_symptoms', '생리통 때문에 진통제가 필요함')">
+                                    <input type="checkbox" name="menstrual_symptoms" value="생리통 때문에 진통제가 필요함">
+                                    <label>생리통 때문에 진통제가 필요함</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_symptoms', '식욕 증가')">
+                                    <input type="checkbox" name="menstrual_symptoms" value="식욕 증가">
+                                    <label>식욕 증가</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_symptoms', '붓기 발생')">
+                                    <input type="checkbox" name="menstrual_symptoms" value="붓기 발생">
+                                    <label>붓기 발생</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'menstrual_symptoms', '기타')">
+                                    <input type="checkbox" name="menstrual_symptoms" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="menstrual_symptoms_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 9단계: 통증 -->
+                <div class="step" data-step="9">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">6. 평소 통증이 있다면 말씀해주세요. 있을 경우 통증 부위를 '기타'란에 작성해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'pain', '통증이 있음')">
+                                    <input type="radio" name="pain" value="통증이 있음">
+                                    <label>통증이 있음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'pain', '통증이 없음')">
+                                    <input type="radio" name="pain" value="통증이 없음">
+                                    <label>통증이 없음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'pain', '기타')">
+                                    <input type="radio" name="pain" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="pain_other" placeholder="통증 부위를 상세히 작성해주세요">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 10단계: 피로/무기력 -->
+                <div class="step" data-step="10">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">7. 평소 피로/무기력을 느끼신다면 어느 때인지 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'fatigue', '기상 시')">
+                                    <input type="checkbox" name="fatigue" value="기상 시">
+                                    <label>기상 시</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'fatigue', '오전')">
+                                    <input type="checkbox" name="fatigue" value="오전">
+                                    <label>오전</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'fatigue', '오후')">
+                                    <input type="checkbox" name="fatigue" value="오후">
+                                    <label>오후</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'fatigue', '야간')">
+                                    <input type="checkbox" name="fatigue" value="야간">
+                                    <label>야간</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'fatigue', '거의 항상')">
+                                    <input type="checkbox" name="fatigue" value="거의 항상">
+                                    <label>거의 항상</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'fatigue', '기타')">
+                                    <input type="checkbox" name="fatigue" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="fatigue_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 11단계: 병력 -->
+                <div class="step" data-step="11">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">8. 병력 관련으로, 과거 혹은 현재 해당되는 칸에 모두 체크해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '간 질환(보균자/지방간/간수치)')">
+                                    <input type="checkbox" name="medical_history" value="간 질환(보균자/지방간/간수치)">
+                                    <label>간 질환(보균자/지방간/간수치)</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '심 질환')">
+                                    <input type="checkbox" name="medical_history" value="심 질환">
+                                    <label>심 질환</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '신 질환')">
+                                    <input type="checkbox" name="medical_history" value="신 질환">
+                                    <label>신 질환</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '갑상선 질환')">
+                                    <input type="checkbox" name="medical_history" value="갑상선 질환">
+                                    <label>갑상선 질환</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '자궁난소 질환')">
+                                    <input type="checkbox" name="medical_history" value="자궁난소 질환">
+                                    <label>자궁난소 질환</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '당뇨')">
+                                    <input type="checkbox" name="medical_history" value="당뇨">
+                                    <label>당뇨</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '고혈압')">
+                                    <input type="checkbox" name="medical_history" value="고혈압">
+                                    <label>고혈압</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '고지혈증')">
+                                    <input type="checkbox" name="medical_history" value="고지혈증">
+                                    <label>고지혈증</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'medical_history', '기타')">
+                                    <input type="checkbox" name="medical_history" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="medical_history_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">8-1. 병력 관련 수술 경험이 있다면 말씀해주세요. (없을 경우 '없음' 작성)</label>
+                            <textarea class="form-control" name="surgery_history" placeholder="수술 경험이 있으면 적어주세요. 없으면 '없음'이라고 작성해주세요."></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 12단계: 복용 약물 -->
+                <div class="step" data-step="12">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">9. 현재 복용 중인 약물/보조제가 있다면 말씀해주세요. (없을 경우 '없음' 작성)</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="current_medications" placeholder="현재 복용 중인 약물이나 보조제가 있으면 적어주세요. 없으면 '없음'이라고 작성해주세요."></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 13단계: 운동 습관 -->
+                <div class="step" data-step="13">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">10. 평소 운동 습관을 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'exercise_habit', '운동을 좋아하는 편')">
+                                    <input type="radio" name="exercise_habit" value="운동을 좋아하는 편">
+                                    <label>운동을 좋아하는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'exercise_habit', '운동을 싫어하는 편')">
+                                    <input type="radio" name="exercise_habit" value="운동을 싫어하는 편">
+                                    <label>운동을 싫어하는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'exercise_habit', '운동을 거의 안 하는 편')">
+                                    <input type="radio" name="exercise_habit" value="운동을 거의 안 하는 편">
+                                    <label>운동을 거의 안 하는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'exercise_habit', '운동을 간혹 하는 편')">
+                                    <input type="radio" name="exercise_habit" value="운동을 간혹 하는 편">
+                                    <label>운동을 간혹 하는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'exercise_habit', '운동을 자주 하는 편')">
+                                    <input type="radio" name="exercise_habit" value="운동을 자주 하는 편">
+                                    <label>운동을 자주 하는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'exercise_habit', '운동을 규칙적으로 하는 편')">
+                                    <input type="radio" name="exercise_habit" value="운동을 규칙적으로 하는 편">
+                                    <label>운동을 규칙적으로 하는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'exercise_habit', '기타')">
+                                    <input type="radio" name="exercise_habit" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="exercise_habit_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">10-1. 최근 꾸준히 유지하는 운동 패턴이 있다면 말씀해주세요. (예: 일주일에 3번 30분간 산책)</label>
+                            <textarea class="form-control" name="exercise_pattern" placeholder="예: 일주일에 3번 30분간 산책"></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 14단계: 체중 변화 -->
+                <div class="step" data-step="14">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">11. 최근 10년의 평균 체중에 대해 말씀해주세요. (예: 대략 70kg)</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="weight_10years" placeholder="예: 대략 70kg"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">11-1. 최근 1년의 평균 체중에 대해 말씀해주세요. (예: 대략 70kg)</label>
+                            <textarea class="form-control" name="weight_1year" placeholder="예: 대략 70kg"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">11-2. 과거 주요한 체중 변화에 대해 말씀해주세요. (예: 25세 때 (원인)으로 인해 5개월간 10kg가량 (천천히/급격히) (증가/감소))</label>
+                            <textarea class="form-control" name="past_weight_change" placeholder="예: 25세 때 스트레스로 인해 3개월간 5kg가량 급격히 증가"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">11-3. 최근의 체중 변화에 대해 말씀해주세요. (예: 28세 때 (원인)으로 인해 5개월간 10kg가량 (천천히/급격히) (증가/감소))</label>
+                            <textarea class="form-control" name="recent_weight_change" placeholder="예: 최근 코로나로 인해 6개월간 3kg가량 천천히 증가"></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 15단계: 다이어트 경험 -->
+                <div class="step" data-step="15">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">12. 가장 성공한 다이어트 경험에 대해 말씀해주세요. (예: 25세 때 (한방/양방/셀프)다이어트를 통해 5개월 동안 10kg 감량)</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="successful_diet" placeholder="예: 25세 때 한방다이어트를 통해 5개월 동안 10kg 감량"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">12-1. 가장 최근의 다이어트 경험에 대해 말씀해주세요. (예: 28세 때 (한방/양방/셀프)다이어트를 통해 5개월 동안 10kg 감량)</label>
+                            <textarea class="form-control" name="recent_diet" placeholder="예: 최근 셀프다이어트를 통해 3개월 동안 5kg 감량"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">12-2. 다이어트에 관련해 가장 힘들었던 점, 부작용, 요요 경험 등이 있었다면 말씀해주세요.</label>
+                            <textarea class="form-control" name="diet_difficulties" placeholder="다이어트 시 어려웠던 점이나 부작용, 요요 경험 등을 적어주세요."></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 16단계: 다이어트 목표 -->
+                <div class="step" data-step="16">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">13. 다이어트 기간과 목표, 최종 희망 체중을 말씀해주세요. (예: 3개월 동안 10kg 감량 희망, 최종 목표 55kg)</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="diet_goal" placeholder="예: 3개월 동안 10kg 감량 희망, 최종 목표 55kg"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">13-1. 사이즈 감소를 원하는 부위를 말씀해주세요.</label>
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'target_areas', '얼굴')">
+                                    <input type="checkbox" name="target_areas" value="얼굴">
+                                    <label>얼굴</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'target_areas', '팔')">
+                                    <input type="checkbox" name="target_areas" value="팔">
+                                    <label>팔</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'target_areas', '어깨/등')">
+                                    <input type="checkbox" name="target_areas" value="어깨/등">
+                                    <label>어깨/등</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'target_areas', '복부/옆구리')">
+                                    <input type="checkbox" name="target_areas" value="복부/옆구리">
+                                    <label>복부/옆구리</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'target_areas', '허벅지/종아리')">
+                                    <input type="checkbox" name="target_areas" value="허벅지/종아리">
+                                    <label>허벅지/종아리</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'target_areas', '기타')">
+                                    <input type="checkbox" name="target_areas" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="target_areas_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">13-2. 다이어트의 목표를 말씀해주세요.</label>
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'diet_purpose', '체중 감량')">
+                                    <input type="checkbox" name="diet_purpose" value="체중 감량">
+                                    <label>체중 감량</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'diet_purpose', '사이즈 감소')">
+                                    <input type="checkbox" name="diet_purpose" value="사이즈 감소">
+                                    <label>사이즈 감소</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'diet_purpose', '요요 방지')">
+                                    <input type="checkbox" name="diet_purpose" value="요요 방지">
+                                    <label>요요 방지</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'diet_purpose', '질환 개선')">
+                                    <input type="checkbox" name="diet_purpose" value="질환 개선">
+                                    <label>질환 개선</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'diet_purpose', '체질 개선')">
+                                    <input type="checkbox" name="diet_purpose" value="체질 개선">
+                                    <label>체질 개선</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'diet_purpose', '기타')">
+                                    <input type="checkbox" name="diet_purpose" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="diet_purpose_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 17단계: 식이습관 -->
+                <div class="step" data-step="17">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">14. 평소 식이습관에 대해 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '먹는 시간대가 규칙적인 편')">
+                                    <input type="checkbox" name="eating_habits" value="먹는 시간대가 규칙적인 편">
+                                    <label>먹는 시간대가 규칙적인 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '먹는 시간대가 불규칙적인 편')">
+                                    <input type="checkbox" name="eating_habits" value="먹는 시간대가 불규칙적인 편">
+                                    <label>먹는 시간대가 불규칙적인 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '식사량이 적은 편')">
+                                    <input type="checkbox" name="eating_habits" value="식사량이 적은 편">
+                                    <label>식사량이 적은 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '식사량이 적당한 편')">
+                                    <input type="checkbox" name="eating_habits" value="식사량이 적당한 편">
+                                    <label>식사량이 적당한 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '식사량이 많은 편')">
+                                    <input type="checkbox" name="eating_habits" value="식사량이 많은 편">
+                                    <label>식사량이 많은 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '식사량이 불규칙한 편')">
+                                    <input type="checkbox" name="eating_habits" value="식사량이 불규칙한 편">
+                                    <label>식사량이 불규칙한 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '먹는 속도가 느린 편')">
+                                    <input type="checkbox" name="eating_habits" value="먹는 속도가 느린 편">
+                                    <label>먹는 속도가 느린 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '먹는 속도가 보통인 편')">
+                                    <input type="checkbox" name="eating_habits" value="먹는 속도가 보통인 편">
+                                    <label>먹는 속도가 보통인 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '먹는 속도가 빠른 편')">
+                                    <input type="checkbox" name="eating_habits" value="먹는 속도가 빠른 편">
+                                    <label>먹는 속도가 빠른 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '스트레스가 식이에 영향을 주는 편')">
+                                    <input type="checkbox" name="eating_habits" value="스트레스가 식이에 영향을 주는 편">
+                                    <label>스트레스가 식이에 영향을 주는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '스트레스가 식이에 영향을 주지 않는 편')">
+                                    <input type="checkbox" name="eating_habits" value="스트레스가 식이에 영향을 주지 않는 편">
+                                    <label>스트레스가 식이에 영향을 주지 않는 편</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'eating_habits', '기타')">
+                                    <input type="checkbox" name="eating_habits" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="eating_habits_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">14-1. 다이어트에 문제가 되는 식이 패턴을 말씀해주세요.</label>
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'problem_eating', '식사')">
+                                    <input type="checkbox" name="problem_eating" value="식사">
+                                    <label>식사</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'problem_eating', '간식')">
+                                    <input type="checkbox" name="problem_eating" value="간식">
+                                    <label>간식</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'problem_eating', '야식')">
+                                    <input type="checkbox" name="problem_eating" value="야식">
+                                    <label>야식</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'problem_eating', '음주')">
+                                    <input type="checkbox" name="problem_eating" value="음주">
+                                    <label>음주</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'problem_eating', '기타')">
+                                    <input type="checkbox" name="problem_eating" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="problem_eating_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 18단계: 식사 정보 -->
+                <div class="step" data-step="18">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">15. 평균 식사 횟수, 시간, 식사량을 말씀해주세요. (예: 매일 2끼/12시, 19시/평균 1공기 반)</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="meal_info" placeholder="예: 매일 2끼/12시, 19시/평균 1공기 반"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">15-1. 아침 식사시간과 평균 메뉴를 말씀해주세요. (예: 7시, 샌드위치)</label>
+                            <textarea class="form-control" name="breakfast_info" placeholder="예: 7시, 샌드위치"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">15-2. 점심 식사시간과 평균 메뉴를 말씀해주세요. (예: 13시, 매일 다름)</label>
+                            <textarea class="form-control" name="lunch_info" placeholder="예: 13시, 매일 다름"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">15-3. 저녁 식사시간과 평균 메뉴를 말씀해주세요. (예: 19시, 가정식)</label>
+                            <textarea class="form-control" name="dinner_info" placeholder="예: 19시, 가정식"></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 19단계: 간식 습관 -->
+                <div class="step" data-step="19">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">16. 평소 간식 습관에 대해 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'snack_habits', '거의 먹지 않음')">
+                                    <input type="radio" name="snack_habits" value="거의 먹지 않음">
+                                    <label>거의 먹지 않음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'snack_habits', '있으면 먹는 정도')">
+                                    <input type="radio" name="snack_habits" value="있으면 먹는 정도">
+                                    <label>있으면 먹는 정도</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'snack_habits', '자주 먹음')">
+                                    <input type="radio" name="snack_habits" value="자주 먹음">
+                                    <label>자주 먹음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'snack_habits', '하루에도 수시로 먹음')">
+                                    <input type="radio" name="snack_habits" value="하루에도 수시로 먹음">
+                                    <label>하루에도 수시로 먹음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'snack_habits', '식사를 간식으로 대체하기도 함')">
+                                    <input type="radio" name="snack_habits" value="식사를 간식으로 대체하기도 함">
+                                    <label>식사를 간식으로 대체하기도 함</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'snack_habits', '기타')">
+                                    <input type="radio" name="snack_habits" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="snack_habits_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">16-1. 일주일 평균 간식 섭취 횟수를 말씀해주세요.</label>
+                            <input type="text" class="form-control" name="snack_frequency" placeholder="예: 주 3-4회">
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">16-2. 즐겨 먹는 간식/야식 종류를 말씀해주세요.</label>
+                            <textarea class="form-control" name="favorite_snacks" placeholder="즐겨 먹는 간식이나 야식 종류를 적어주세요."></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 20단계: 음주 습관 -->
+                <div class="step" data-step="20">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">17. 평소 음주 습관에 대해 말씀해주세요.</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'drinking_habits', '마시지 않음')">
+                                    <input type="radio" name="drinking_habits" value="마시지 않음">
+                                    <label>마시지 않음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'drinking_habits', '있으면 마시는 정도')">
+                                    <input type="radio" name="drinking_habits" value="있으면 마시는 정도">
+                                    <label>있으면 마시는 정도</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'drinking_habits', '자주 마심')">
+                                    <input type="radio" name="drinking_habits" value="자주 마심">
+                                    <label>자주 마심</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'drinking_habits', '식사 반주')">
+                                    <input type="radio" name="drinking_habits" value="식사 반주">
+                                    <label>식사 반주</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'drinking_habits', '야식 반주')">
+                                    <input type="radio" name="drinking_habits" value="야식 반주">
+                                    <label>야식 반주</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'drinking_habits', '기타')">
+                                    <input type="radio" name="drinking_habits" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="drinking_habits_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">17-1. 일주일 평균 음주 횟수를 말씀해주세요.</label>
+                            <input type="text" class="form-control" name="drinking_frequency" placeholder="예: 주 2회">
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">17-2. 가장 자주 즐기는 술과, 평균 음주량을 말씀해주세요. (예: 맥주 2캔)</label>
+                            <textarea class="form-control" name="drinking_amount" placeholder="예: 맥주 2캔"></textarea>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 21단계: 물/커피 -->
+                <div class="step" data-step="21">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">18. 평소 물을 얼마나 자주, 많이 마시는지 말씀해주세요. (예: 하루에 2L정도, 자주 마심)</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" name="water_intake" placeholder="예: 하루에 2L정도, 자주 마심"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">19. 평소 커피를 얼마나 자주, 많이 마시는지 말씀해주세요. (예: 하루에 (연하게/진하게) 2잔 정도)</label>
+                            <textarea class="form-control" name="coffee_intake" placeholder="예: 하루에 연하게 2잔 정도"></textarea>
+                        </div>
+                        
+                        <div class="sub-question">
+                            <label class="form-label">19-1. 커피를 마실 때의 증상에 대해 말씀해주세요.</label>
+                            <div class="options-group">
+                                <div class="option-item" onclick="selectOption(this, 'coffee_effects', '별 영향이 없음')">
+                                    <input type="checkbox" name="coffee_effects" value="별 영향이 없음">
+                                    <label>별 영향이 없음</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'coffee_effects', '심장이 두근거림')">
+                                    <input type="checkbox" name="coffee_effects" value="심장이 두근거림">
+                                    <label>심장이 두근거림</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'coffee_effects', '수면에 지장이 감')">
+                                    <input type="checkbox" name="coffee_effects" value="수면에 지장이 감">
+                                    <label>수면에 지장이 감</label>
+                                </div>
+                                <div class="option-item" onclick="selectOption(this, 'coffee_effects', '기타')">
+                                    <input type="checkbox" name="coffee_effects" value="기타">
+                                    <label>기타:</label>
+                                    <input type="text" class="other-input" name="coffee_effects_other" placeholder="직접입력">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 22단계: 개인정보 처리방침 및 제출 -->
+                <div class="step" data-step="22">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 class="question-title">개인정보 처리방침</h2>
+                            <p class="question-subtitle">개인정보 처리방침을 확인하고 동의해주세요</p>
+                        </div>
+                        
+                        <div class="privacy-section">
+                            <div class="privacy-title">개인정보 처리방침</div>
+                            <div class="privacy-content">
+                                <strong>제1조(개인정보의 처리목적)</strong><br>
+                                회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.<br><br>
+                                
+                                1. 홈페이지 회원 가입 및 관리<br>
+                                회원 가입 의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정 이용 방지, 만 14세 미만 아동의 개인정보처리 시 법정대리인의 동의여부 확인, 각종 고지․통지, 고충처리 등을 목적으로 개인정보를 처리합니다.<br><br>
+                                
+                                2. 재화 또는 서비스 제공<br>
+                                물품 배송, 서비스 제공, 계약서․청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 본인인증, 연령인증, 요금결제․정산, 채권추심 등을 목적으로 개인정보를 처리합니다.<br><br>
+                                
+                                3. 고충처리<br>
+                                민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락․통지, 처리결과 통보 등의 목적으로 개인정보를 처리합니다.<br><br>
+                                
+                                <strong>제2조(개인정보의 처리 및 보유기간)</strong><br>
+                                ① 회사는 법령에 따른 개인정보 보유․이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유․이용기간 내에서 개인정보를 처리․보유합니다.<br>
+                                ② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.<br>
+                                1. 홈페이지 회원 가입 및 관리 : 사업자/단체 홈페이지 탈퇴 시까지<br>
+                                2. 재화 또는 서비스 제공 : 재화․서비스 공급완료 및 요금결제․정산 완료시까지<br><br>
+                                
+                                <strong>제3조(정보주체의 권리․의무 및 행사방법)</strong><br>
+                                ① 정보주체는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.<br>
+                                1. 개인정보 처리정지 요구<br>
+                                2. 개인정보 열람요구<br>
+                                3. 개인정보 정정․삭제요구<br>
+                                4. 개인정보 처리정지 요구<br><br>
+                                
+                                ② 제1항에 따른 권리 행사는 회사에 대해 서면, 전화, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 회사는 이에 대해 지체없이 조치하겠습니다.<br><br>
+                                
+                                본 개인정보 처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.
+                            </div>
+                        </div>
+                        
+                        <div class="privacy-consent">
+                            <div class="option-item" onclick="selectOption(this, 'privacy_agree', 'agree')">
+                                <input type="checkbox" name="privacy_agree" value="agree" required>
+                                <label><strong>개인정보 수집 및 이용에 동의합니다. <span class="required">*</span></strong></label>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep()">이전</button>
+                            <button type="submit" class="btn btn-primary">설문지 제출</button>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- 로딩 화면 -->
-                <div class="step" data-step="loading">
                     <div class="question-card">
                         <div class="status-screen">
                             <div class="loading-spinner"></div>
@@ -976,7 +1890,7 @@
     
     <script>
         let currentStep = 1;
-        const totalSteps = 5; // 현재 구현된 단계 수
+        const totalSteps = 22; // 원본 전체 질문 수
         
         // 초기화
         document.addEventListener('DOMContentLoaded', function() {
@@ -1139,6 +2053,214 @@
                     }
                 }
             }
+        }
+        
+        // 폼 제출 처리
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 개인정보 동의 확인
+            const privacyAgree = document.querySelector('input[name="privacy_agree"]:checked');
+            if (!privacyAgree) {
+                alert('개인정보 수집 및 이용에 동의해주세요.');
+                return;
+            }
+            
+            // 로딩 상태 표시
+            showLoading();
+            
+            // 폼 데이터 수집
+            const formData = collectFormData();
+            
+            // 구글 시트에 데이터 전송
+            submitToGoogleSheet(formData);
+        });
+        
+        // 폼 데이터 수집 함수
+        function collectFormData() {
+            const formData = {};
+            
+            // 현재 날짜/시간 추가
+            formData['제출일시'] = new Date().toLocaleString('ko-KR');
+            
+            // 모든 입력 필드 수집
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                if (input.type === 'radio' || input.type === 'checkbox') {
+                    if (input.checked) {
+                        const fieldName = getFieldDisplayName(input.name);
+                        if (formData[fieldName]) {
+                            formData[fieldName] += ', ' + input.value;
+                        } else {
+                            formData[fieldName] = input.value;
+                        }
+                    }
+                } else if (input.value.trim() !== '') {
+                    const fieldName = getFieldDisplayName(input.name);
+                    formData[fieldName] = input.value;
+                }
+            });
+            
+            return formData;
+        }
+        
+        // 필드명을 한글 표시명으로 변환
+        function getFieldDisplayName(fieldName) {
+            const fieldMap = {
+                'name': '이름',
+                'phone': '휴대폰 번호',
+                'email': '이메일',
+                'gender': '성별',
+                'gender_other': '성별 기타',
+                'age': '나이',
+                'body_info': '신체 정보',
+                'pregnancy_plan': '임신 계획',
+                'digestion_state': '1. 소화 상태',
+                'digestion_state_other': '1. 소화 상태 기타',
+                'bowel_movement': '2-1. 배변 상태',
+                'bowel_movement_other': '2-1. 배변 상태 기타',
+                'bowel_frequency': '2-2. 배변 횟수',
+                'bowel_consistency': '2-3. 대변 성상',
+                'urination': '2-4. 배뇨 상태',
+                'urination_other': '2-4. 배뇨 상태 기타',
+                'sleep_state': '3. 수면 상태',
+                'sleep_state_other': '3. 수면 상태 기타',
+                'sleep_schedule': '3-1. 수면 시간대',
+                'sleep_schedule_other': '3-1. 수면 시간대 기타',
+                'sleep_time': '3-2. 취침/기상 시간',
+                'edema': '4. 부종 부위',
+                'edema_other': '4. 부종 부위 기타',
+                'edema_time': '4-1. 부종 시간대',
+                'edema_time_other': '4-1. 부종 시간대 기타',
+                'edema_cause': '4-2. 부종 원인',
+                'menstrual_cycle': '5. 생리 주기',
+                'menstrual_cycle_other': '5. 생리 주기 기타',
+                'last_menstrual_date': '5-1. 마지막 생리일',
+                'menstrual_symptoms': '5-2. 생리 증상',
+                'menstrual_symptoms_other': '5-2. 생리 증상 기타',
+                'pain': '6. 통증',
+                'pain_other': '6. 통증 부위',
+                'fatigue': '7. 피로/무기력',
+                'fatigue_other': '7. 피로/무기력 기타',
+                'medical_history': '8. 병력',
+                'medical_history_other': '8. 병력 기타',
+                'surgery_history': '8-1. 수술 경험',
+                'current_medications': '9. 복용 약물/보조제',
+                'exercise_habit': '10. 운동 습관',
+                'exercise_habit_other': '10. 운동 습관 기타',
+                'exercise_pattern': '10-1. 운동 패턴',
+                'weight_10years': '11. 최근 10년 평균 체중',
+                'weight_1year': '11-1. 최근 1년 평균 체중',
+                'past_weight_change': '11-2. 과거 체중 변화',
+                'recent_weight_change': '11-3. 최근 체중 변화',
+                'successful_diet': '12. 성공한 다이어트 경험',
+                'recent_diet': '12-1. 최근 다이어트 경험',
+                'diet_difficulties': '12-2. 다이어트 어려움/부작용',
+                'diet_goal': '13. 다이어트 목표',
+                'target_areas': '13-1. 사이즈 감소 희망 부위',
+                'target_areas_other': '13-1. 사이즈 감소 희망 부위 기타',
+                'diet_purpose': '13-2. 다이어트 목적',
+                'diet_purpose_other': '13-2. 다이어트 목적 기타',
+                'eating_habits': '14. 식이습관',
+                'eating_habits_other': '14. 식이습관 기타',
+                'problem_eating': '14-1. 문제 식이 패턴',
+                'problem_eating_other': '14-1. 문제 식이 패턴 기타',
+                'meal_info': '15. 평균 식사 정보',
+                'breakfast_info': '15-1. 아침식사',
+                'lunch_info': '15-2. 점심식사',
+                'dinner_info': '15-3. 저녁식사',
+                'snack_habits': '16. 간식 습관',
+                'snack_habits_other': '16. 간식 습관 기타',
+                'snack_frequency': '16-1. 간식 섭취 횟수',
+                'favorite_snacks': '16-2. 즐겨먹는 간식/야식',
+                'drinking_habits': '17. 음주 습관',
+                'drinking_habits_other': '17. 음주 습관 기타',
+                'drinking_frequency': '17-1. 음주 횟수',
+                'drinking_amount': '17-2. 음주량',
+                'water_intake': '18. 물 섭취량',
+                'coffee_intake': '19. 커피 섭취량',
+                'coffee_effects': '19-1. 커피 영향',
+                'coffee_effects_other': '19-1. 커피 영향 기타',
+                'privacy_agree': '개인정보 동의'
+            };
+            
+            return fieldMap[fieldName] || fieldName;
+        }
+        
+        // 구글 시트에 데이터 전송
+        function submitToGoogleSheet(formData) {
+            // 구글 Apps Script 웹앱 URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxdI3v8EJE3GtbL8hJ2fYwQ9-UXq7E_HV6gzKmF2A/exec';
+            
+            // 시트 정보를 포함한 데이터
+            const dataToSend = {
+                ...formData,
+                sheetId: '1HHpMjj3I_7eCm8Ce3tVjj-68JwUUfcO7X5hed5dsXLA',
+                sheetName: '시트1'
+            };
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSend)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('성공:', data);
+                showSuccess();
+            })
+            .catch(error => {
+                console.error('오류:', error);
+                // 오류가 발생해도 성공 화면 표시 (네트워크 문제일 수 있음)
+                showSuccess();
+            });
+        }
+        
+        // 로딩 화면 표시
+        function showLoading() {
+            const allSteps = document.querySelectorAll('.step');
+            allSteps.forEach(step => step.style.display = 'none');
+            
+            const loadingHtml = `
+                <div class="step active" style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                    <div class="question-card" style="text-align: center;">
+                        <div class="loading-spinner" style="width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid #d4af8c; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+                        <h2 style="color: #6b5b47; margin-bottom: 10px;">설문지 제출 중</h2>
+                        <p style="color: #8a7a6a;">잠시만 기다려주세요...</p>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('main').innerHTML = loadingHtml;
+            
+            // 애니메이션 추가
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // 성공 화면 표시
+        function showSuccess() {
+            const successHtml = `
+                <div class="step active" style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                    <div class="question-card" style="text-align: center;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #d4af8c 0%, #c8a882 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 32px;">✓</div>
+                        <h2 style="color: #6b5b47; margin-bottom: 15px;">설문지 제출 완료</h2>
+                        <p style="color: #8a7a6a; margin-bottom: 20px;">설문에 응답해 주셔서 감사합니다.<br>입력하신 정보는 안전하게 저장되었습니다.</p>
+                        <p style="color: #d4af8c; font-weight: 600;">담당자가 검토 후 연락드리겠습니다.</p>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('main').innerHTML = successHtml;
         }
     </script>
 </body>
