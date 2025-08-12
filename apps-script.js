@@ -3,8 +3,8 @@
 
 function doPost(e) {
   try {
-    // 시트 ID (새 Google Workspace 계정의 구글 시트 ID로 교체 필요)
-    const SHEET_ID = 'NEW_GOOGLE_WORKSPACE_SHEET_ID_HERE';
+    // 시트 ID (새 Google Workspace 계정의 구글 시트)
+    const SHEET_ID = '1Cz6LhDOLq412AmCzSHxcfGJinKTCqgRGVfLEyLp8re8';
     
     // Google Chat Webhook URL
     const GOOGLE_CHAT_WEBHOOK = 'https://chat.googleapis.com/v1/spaces/AAQATL-bikA/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=c7M2D8YU_u_zdIL4zXttatWqpIHqRmgTquPtQwVZDIk';
@@ -126,7 +126,7 @@ function sendGoogleChatNotification(data, rowNumber) {
             `📞 *전화번호:* ${customerPhone}\n` +
             `📧 *이메일:* ${customerEmail}\n\n` +
             `📊 구글 시트 ${rowNumber}번째 행에 저장되었습니다.\n\n` +
-            `🔗 *구글 시트 보기:* https://docs.google.com/spreadsheets/d/NEW_GOOGLE_WORKSPACE_SHEET_ID_HERE/edit`
+            `🔗 *구글 시트 보기:* https://docs.google.com/spreadsheets/d/1Cz6LhDOLq412AmCzSHxcfGJinKTCqgRGVfLEyLp8re8/edit`
     };
     
     // Google Chat으로 메시지 전송
@@ -213,7 +213,7 @@ function sendGmailNotification(data, rowNumber) {
         <tr><td><b>📊 저장 위치</b></td><td>구글 시트 ${rowNumber}번째 행</td></tr>
       </table>
       <br>
-      <p><a href="https://docs.google.com/spreadsheets/d/NEW_GOOGLE_WORKSPACE_SHEET_ID_HERE/edit" target="_blank">📊 구글 시트에서 전체 데이터 보기</a></p>
+      <p><a href="https://docs.google.com/spreadsheets/d/1Cz6LhDOLq412AmCzSHxcfGJinKTCqgRGVfLEyLp8re8/edit" target="_blank">📊 구글 시트에서 전체 데이터 보기</a></p>
     `;
     
     // 본인의 Gmail 주소로 알림 전송
