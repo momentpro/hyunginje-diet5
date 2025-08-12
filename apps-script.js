@@ -1,22 +1,27 @@
-// Google Apps Script 코드
-// 이 코드를 https://script.google.com/home/start 에서 새 프로젝트를 만들어 붙여넣고 배포하세요.
+// Google Apps Script 코드 - 구글 시트 자동 저장
+// 이 코드를 https://script.google.com 에서 새 프로젝트를 만들어 붙여넣고 배포하세요.
 
 function doPost(e) {
   try {
-    // JSON 데이터 파싱
-    const data = JSON.parse(e.postData.contents);
+    // 시트 ID (실제 구글 시트 ID)
+    const SHEET_ID = '1HHpMjj3I_7eCm8Ce3tVjj-68JwUUfcO7X5hed5dsXLA';
     
-    // 시트 ID와 시트명 가져오기
-    const sheetId = data.sheetId || '1HHpMjj3I_7eCm8Ce3tVjj-68JwUUfcO7X5hed5dsXLA';
-    const sheetName = data.sheetName || '시트1';
+    // JSON 데이터 파싱
+    let data;
+    try {
+      data = JSON.parse(e.postData.contents);
+    } catch (parseError) {
+      // URL 인코딩된 데이터 처리
+      data = e.parameter;
+    }
     
     // 시트 열기
-    const spreadsheet = SpreadsheetApp.openById(sheetId);
-    let sheet = spreadsheet.getSheetByName(sheetName);
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    let sheet = spreadsheet.getSheetByName('시트1');
     
     // 시트가 없으면 생성
     if (!sheet) {
-      sheet = spreadsheet.insertSheet(sheetName);
+      sheet = spreadsheet.insertSheet('시트1');
     }
     
     // 헤더 행이 없으면 생성
@@ -70,7 +75,8 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({
         success: true,
         message: '데이터가 성공적으로 저장되었습니다.',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        rowNumber: sheet.getLastRow()
       }))
       .setMimeType(ContentService.MimeType.JSON);
       
@@ -90,8 +96,29 @@ function doPost(e) {
 function doGet(e) {
   return ContentService
     .createTextOutput(JSON.stringify({
-      message: '이 웹앱은 POST 요청만 허용합니다.',
+      message: '형인재 감량비책 설문지 데이터 수집 API가 정상 작동 중입니다.',
       timestamp: new Date().toISOString()
     }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// 테스트 함수
+function testFunction() {
+  const testData = {
+    '제출일시': new Date().toLocaleString('ko-KR'),
+    '이름': '테스트 사용자',
+    '휴대폰 번호': '010-1234-5678',
+    '이메일': 'test@example.com',
+    '성별': '여성',
+    '나이': '30'
+  };
+  
+  const mockEvent = {
+    postData: {
+      contents: JSON.stringify(testData)
+    }
+  };
+  
+  const result = doPost(mockEvent);
+  Logger.log(result.getContent());
 }
